@@ -4,11 +4,11 @@
 
 	<groupId>org.trello4j</groupId>
 	<artifactId>trello4j</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>trello4j</name>
-	<url>https://github.com/joelso/trello4j</url>
+	<url>https://github.com/palash-bhowmick/trello4j</url>
     <description>Java wrapper around Trello API</description>
 
 	<licenses>
@@ -18,11 +18,11 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<scm>
-		<url>https://github.com/joelso/trello4j</url>
-		<connection>scm:git:git://github.com/joelso/trello4j.git</connection>
-		<developerConnection>scm:git:git://github.com/joelso/trello4j.git</developerConnection>
+		<url>https://github.com/palash-bhowmick/trello4j</url>
+		<connection>scm:git:git://github.com/palash-bhowmick/trello4j.git</connection>
+		<developerConnection>scm:git:git://github.com/palash-bhowmick/trello4j.git</developerConnection>
 	</scm>
 	
 	<developers>
@@ -34,6 +34,22 @@
 			<roles>
 				<role>lead</role>
 				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+        <developer>
+			<id>palash-bhowmick</id>
+			<name>Palash</name>
+			<email>palash-bhowmick@users.noreply.github.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+        <developer>
+			<id>tanmoy-guha</id>
+			<name>Tanmoy</name>
+			<email>tanmoy.guha@globalids.com</email>
+			<roles>
 				<role>developer</role>
 			</roles>
 		</developer>
