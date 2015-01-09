@@ -101,7 +101,7 @@ Now you got two options:
 <tr><td>GET /1/cards/[card_id]/list                        </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/cards/[card_id]/list/[field]                </td><td>TODO</td></tr>
 <tr><td>GET /1/cards/[card_id]/members                     </td><td>IMPLEMENTED</td></tr>
-<tr><td>PUT /1/cards/[card_id]                             </td><td>TODO</td></tr>
+<tr><td>PUT /1/cards/[card_id]                             </td><td>IMPLEMENTED</td></tr>
 <tr><td>PUT /1/cards/[card_id]/closed                      </td><td>TODO</td></tr>
 <tr><td>PUT /1/cards/[card_id]/desc                        </td><td>TODO</td></tr>
 <tr><td>PUT /1/cards/[card_id]/due                         </td><td>TODO</td></tr>
@@ -112,9 +112,9 @@ Now you got two options:
 <tr><td>POST /1/cards/[card_id]/attachments                </td><td>TODO</td></tr>
 <tr><td>POST /1/cards/[card_id]/checklists                 </td><td>TODO</td></tr>
 <tr><td>POST /1/cards/[card_id]/labels                     </td><td>TODO</td></tr>
-<tr><td>POST /1/cards/[card_id]/members                    </td><td>TODO</td></tr>
+<tr><td>POST /1/cards/[card_id]/members                    </td><td>IMPLEMENTED</td></tr>
 <tr><td>POST /1/cards/[card_id]/membersVoted               </td><td>TODO</td></tr>
-<tr><td>DELETE /1/cards/[card_id]                          </td><td>TODO</td></tr>
+<tr><td>DELETE /1/cards/[card_id]                          </td><td>IMPLEMENTED</td></tr>
 <tr><td>DELETE /1/cards/[card_id]/checklists/[idChecklist] </td><td>TODO</td></tr>
 <tr><td>DELETE /1/cards/[card_id]/labels/[color]           </td><td>TODO</td></tr>
 <tr><td>DELETE /1/cards/[card_id]/members/[idMember]       </td><td>TODO</td></tr>
@@ -131,18 +131,18 @@ Now you got two options:
 <tr><td>PUT /1/checklists/[checklist_id]                                      </td><td>TODO</td></tr>
 <tr><td>PUT /1/checklists/[checklist_id]/name                                 </td><td>TODO</td></tr>
 <tr><td>POST /1/checklists                                                    </td><td>TODO</td></tr>
-<tr><td>POST /1/checklists/[checklist_id]/checkItems                          </td><td>TODO</td></tr>
+<tr><td>POST /1/checklists/[checklist_id]/checkItems                          </td><td>IMPLEMENTED</td></tr>
 <tr><td>DELETE /1/checklists/[checklist_id]/checkItems/[idCheckItem]          </td><td>TODO</td></tr>
 
 <tr><th colspan="2">Lists</th></tr>
 <tr><td>GET /1/lists/[list_id]                                                </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/lists/[list_id]/[field]                                        </td><td>TODO</td></tr>
-<tr><td>GET /1/lists/[list_id]/actions                                        </td><td>IMPLEMENTED</td></tr>
+<tr><td>GET /1/lists/[list_id]/action                                        </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/lists/[list_id]/board                                          </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/lists/[list_id]/board/[field]                                  </td><td>TODO</td></tr>
 <tr><td>GET /1/lists/[list_id]/cards                                          </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/lists/[list_id]/cards/[filter]                                 </td><td>IMPLEMENTED</td></tr>
-<tr><td>PUT /1/lists/[list_id]                                                </td><td>TODO</td></tr>
+<tr><td>PUT /1/lists/[list_id]                                                </td><td>IMPLEMENTED</td></tr>
 <tr><td>PUT /1/lists/[list_id]/closed                                         </td><td>TODO</td></tr>
 <tr><td>PUT /1/lists/[list_id]/name                                           </td><td>TODO</td></tr>
 <tr><td>POST /1/lists                                                         </td><td>TODO</td></tr>
@@ -154,7 +154,7 @@ Now you got two options:
 <tr><td>GET /1/members/[member_id or username]/actions                        </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/members/[member_id or username]/boards                         </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/members/[member_id or username]/boards/[filter]                </td><td>IMPLEMENTED</td></tr>
-<tr><td>GET /1/members/[member_id or username]/boardsInvited                  </td><td>IMPLEMENTED</td></tr>
+<tr><td>GET /1/members/[member_id or username]/boardInvited                  </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/members/[member_id or username]/boardsInvited/[field]          </td><td>TODO</td></tr>
 <tr><td>GET /1/members/[member_id or username]/cards                          </td><td>IMPLEMENTED</td></tr>
 <tr><td>GET /1/members/[member_id or username]/cards/[filter]                 </td><td>IMPLEMENTED</td></tr>
@@ -214,7 +214,7 @@ Now you got two options:
 
 ## Contributors
 
-[skydjol](https://github.com/skydjol)
+[skydjol](https://github.com/skydjol)<br>[tanmoy-guha](https://github.com/tanmoy-guha)
 
 
 	
