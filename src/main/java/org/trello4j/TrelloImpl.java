@@ -1,16 +1,18 @@
 package org.trello4j;
 
 import com.google.gson.reflect.TypeToken;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.trello4j.model.*;
 import org.trello4j.model.Board.Prefs;
 import org.trello4j.model.Card.Attachment;
 import org.trello4j.model.Checklist.CheckItem;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -412,7 +414,7 @@ public class TrelloImpl implements Trello {
         validateObjectId(cardId);
 
         final String url = TrelloURL
-                .create(apiKey, TrelloURL.CARD_ATTACHEMENT_URL, cardId)
+                .create(apiKey, TrelloURL.CARD_ATTACHMENT_URL, cardId)
                 .token(token)
                 .build();
 
@@ -598,6 +600,44 @@ public class TrelloImpl implements Trello {
         keyValueMap.put("closed", "false");
 
         doPut(url, keyValueMap);
+    }
+
+    @Override
+    public void addAttachment(String cardId, String fileName) {
+        validateObjectId(cardId);
+
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.CARD_ATTACHMENT_URL, cardId)
+                .token(token)
+                .build();
+
+        doMultiPartRequest(url, fileName);
+    }
+
+    @Override
+    public void addAttachmentUrl(String cardId, String url) {
+        final String url_serv = TrelloURL
+                .create(apiKey, TrelloURL.CARD_ATTACHMENT_URL, cardId)
+                .token(token)
+                .build();
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("url", url);
+
+        doPost(url_serv, map);
+    }
+
+    @Override
+    public void deleteAttachment(String cardId, String attachmentId) {
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.CARD_SPECIFIC_ATTACHMENT_URL, cardId, attachmentId)
+                .token(token)
+                .build();
+
+//        Map<String, String> map = new HashMap<String, String>();
+//        map.put("url", url);
+
+        doDelete(url);
     }
 
     /*
@@ -1369,6 +1409,29 @@ public class TrelloImpl implements Trello {
 
     private InputStream doRequest(String url, String requestMethod) {
         return doRequest(url, requestMethod, null);
+    }
+
+    /**
+     * Execute a POST request with Multipart File Upload Request.
+     *
+     * @param url      Trello API URL.
+     * @param filePath Absolute Path of the File to Attach.
+     */
+    private void doMultiPartRequest(String url, String filePath) {
+        try {
+            DefaultHttpClient httpclient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(url);
+
+            FileBody uploadFilePart = new FileBody(new File(filePath));
+            MultipartEntity reqEntity = new MultipartEntity();
+            reqEntity.addPart("file", uploadFilePart);
+            httpPost.setEntity(reqEntity);
+
+            HttpResponse execute = httpclient.execute(httpPost);
+            System.out.println("execute = " + execute.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

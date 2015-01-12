@@ -79,4 +79,28 @@ public interface CardService {
      * @param cardId the card id
      */
     void restoreCard(String cardId);
+
+    /**
+     * Upload Attachment to Card.
+     *
+     * @param cardId   the card id
+     * @param fileName Absolute Path of the File Path to attach
+     */
+    void addAttachment(String cardId, String fileName);
+
+    /**
+     * Add Attachment to Card.
+     *
+     * @param cardId the card id
+     * @param url    url of the file to add as attachment
+     */
+    void addAttachmentUrl(String cardId, String url);
+
+    /**
+     * Delete a Specific Attachment from Card.
+     *
+     * @param cardId       the card id
+     * @param attachmentId Id of the Attachment to delete
+     */
+    void deleteAttachment(String cardId, String attachmentId);
 }
