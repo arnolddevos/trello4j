@@ -103,4 +103,9 @@ public interface CardService {
      * @param attachmentId Id of the Attachment to delete
      */
     void deleteAttachment(String cardId, String attachmentId);
+
+    /**
+     *  Add a comment to a card.
+     */
+    Action createComment(String idCard, String text);
 }

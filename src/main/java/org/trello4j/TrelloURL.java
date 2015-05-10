@@ -44,6 +44,7 @@ public class TrelloURL {
     public static final String CARD_MEMBER_URL = TRELLO_REST_URL + "cards/{0}/idMembers";
     public static final String CARD_LABEL_URL = TRELLO_REST_URL + "cards/{0}/labels";
     public static final String CHECKLIST_POST_URL = TRELLO_REST_URL + "cards/{0}/checklists";
+    public static final String COMMENT_POST_URL = TRELLO_REST_URL + "cards/{0}/actions/comments";
 
     public static final String CHECKLIST_URL = TRELLO_REST_URL + "checklists/{0}";
     public static final String CHECKLIST_BOARD_URL = TRELLO_REST_URL + "checklists/{0}/board";
@@ -78,6 +79,8 @@ public class TrelloURL {
     public static final String NOTIFICATION_LIST_URL = TRELLO_REST_URL + "notifications/{0}/list";
     public static final String NOTIFICATION_MEMBER_CREATOR_URL = TRELLO_REST_URL + "notifications/{0}/membersCreator";
     public static final String NOTIFICATION_ORGANIZATION_URL = TRELLO_REST_URL + "notifications/{0}/organization";
+    public static final String NOTIFICATION_UNREAD_URL = TRELLO_REST_URL + "notifications/{0}/unread";
+    public static final String NOTIFICATION_ALL_READ_URL = TRELLO_REST_URL + "notifications/all/read";
 
     public static final String TYPE_URL = TRELLO_REST_URL + "types/{0}";
 

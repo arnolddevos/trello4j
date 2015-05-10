@@ -698,6 +698,21 @@ public class TrelloImpl implements Trello {
         }, doPost(url, keyValueMap));
     }
 
+    @Override
+    public Action createComment(String idCard, String text) {
+        validateObjectId(idCard);
+
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.COMMENT_POST_URL, idCard)
+                .token(token)
+                .build();
+        Map<String, String> keyValueMap = new HashMap<String, String>();
+        keyValueMap.put("text", text);
+
+        return trelloObjFactory.createObject(new TypeToken<Action>() {
+        }, doPost(url, keyValueMap));
+    }
+
     /*
          * (non-Javadoc)
          *
@@ -1021,6 +1036,26 @@ public class TrelloImpl implements Trello {
 
         return trelloObjFactory.createObject(new TypeToken<Member>() {
         }, doGet(url));
+    }
+
+    @Override
+    public void setNotificationUnread(String notificationId, boolean unread) {
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.NOTIFICATION_UNREAD_URL, notificationId)
+                .token(token)
+                .build();
+        Map<String, String> keyValueMap = new HashMap<String, String>();
+        keyValueMap.put("value", Boolean.toString(unread));
+        doPut(url, keyValueMap);
+    }
+
+    @Override
+    public void setAllNotificationsRead() {
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.NOTIFICATION_ALL_READ_URL)
+                .token(token)
+                .build();
+        doPost(url, null);
     }
 
     /*
@@ -1443,7 +1478,7 @@ public class TrelloImpl implements Trello {
      */
     private InputStream doRequest(String url, String requestMethod, Map<String, String> map) {
         int tryCount = 1;
-        List<Integer> delays = Arrays.asList(1, 5, 10, 30, 120);
+        List<Integer> delays = Arrays.asList(); // Arrays.asList(1, 5, 10, 30, 120);
         while (true) {
             try {
                 HttpsURLConnection conn = (HttpsURLConnection) new URL(url)
@@ -1469,10 +1504,11 @@ public class TrelloImpl implements Trello {
                             conn.getInputStream(), GZIP_ENCODING.equalsIgnoreCase(conn.getContentEncoding())
                     );
                 }
+                System.err.println("HTTP response " + conn.getResponseCode());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (tryCount <= 5) {
+            if (tryCount <= delays.size()) {
                 int delaySec = delays.get(tryCount - 1);
                 long delay = delaySec * 1000;
                 System.out.println("Failed to get response. Will Try after " + delaySec + " sec. try=" + tryCount);

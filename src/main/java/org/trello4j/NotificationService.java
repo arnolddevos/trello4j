@@ -94,4 +94,12 @@ public interface NotificationService {
 	 */
 	Member getOrganizationCreatorByNotification(String notificationId,
 			String... filter);
+
+  /**
+   * Sets the notification status. 
+   * 
+   */
+  void setNotificationUnread(String notificationId, boolean unread);
+
+  void setAllNotificationsRead();
 }
