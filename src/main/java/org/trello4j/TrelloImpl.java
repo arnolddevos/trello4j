@@ -579,6 +579,18 @@ public class TrelloImpl implements Trello {
     }
 
     @Override
+    public void setCardDesc(String cardId, String desc) {
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.CARD_DESC_URL, cardId)
+                .token(token)
+                .build();
+        Map<String, String> keyValueMap = new HashMap<String, String>();
+        keyValueMap.put("value", desc);
+
+        doPut(url, keyValueMap);
+    }
+
+    @Override
     public void addLabelToCard(String cardId, String labelValue) {
         final String url = TrelloURL
                 .create(apiKey, TrelloURL.CARD_LABEL_URL, cardId)

@@ -59,6 +59,14 @@ public interface CardService {
     void moveCardToList(String cardId, String listId);
 
     /**
+     * Set description on a Card.
+     *
+     * @param cardId     the card id
+     * @param desc       the description text
+     */
+    void setCardDesc(String cardId, String desc);
+
+    /**
      * Add Label to a Card by color.
      *
      * @param cardId     the card id
@@ -70,7 +78,7 @@ public interface CardService {
      * Add Label to a Card by name.
      *
      * @param cardId     the card id
-     * @param labelName  the naem of the Label to add
+     * @param labelName  the name of the Label to add
      */
     void addLabelNameToCard(String cardId, String labelName);
 

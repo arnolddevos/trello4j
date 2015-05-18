@@ -44,6 +44,7 @@ public class TrelloURL {
     public static final String CARD_DELETE_URL = TRELLO_REST_URL + "cards/{0}";
     public static final String CARD_MEMBER_URL = TRELLO_REST_URL + "cards/{0}/idMembers";
     public static final String CARD_LABEL_URL = TRELLO_REST_URL + "cards/{0}/labels";
+    public static final String CARD_DESC_URL = TRELLO_REST_URL + "cards/{0}/desc";
     public static final String CHECKLIST_POST_URL = TRELLO_REST_URL + "cards/{0}/checklists";
     public static final String COMMENT_POST_URL = TRELLO_REST_URL + "cards/{0}/actions/comments";
 
