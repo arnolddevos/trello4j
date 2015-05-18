@@ -125,6 +125,18 @@ public class TrelloImpl implements Trello {
         }, doGet(url));
     }
 
+    @Override
+    public List<Label> getLabelsByBoard(String boardId) {
+        validateObjectId(boardId);
+
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.BOARD_LABELS_URL, boardId)
+                .token(token)
+                .build();
+        return trelloObjFactory.createObject(new TypeToken<List<Label>>() {
+        }, doGet(url));
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -574,6 +586,18 @@ public class TrelloImpl implements Trello {
                 .build();
         Map<String, String> keyValueMap = new HashMap<String, String>();
         keyValueMap.put("value", labelValue);
+
+        doPost(url, keyValueMap);
+    }
+
+    @Override
+    public void addLabelNameToCard(String cardId, String labelName) {
+        final String url = TrelloURL
+                .create(apiKey, TrelloURL.CARD_LABEL_URL, cardId)
+                .token(token)
+                .build();
+        Map<String, String> keyValueMap = new HashMap<String, String>();
+        keyValueMap.put("name", labelName);
 
         doPost(url, keyValueMap);
     }

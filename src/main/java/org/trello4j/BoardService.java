@@ -25,6 +25,8 @@ public interface BoardService {
 
     List<Checklist> getChecklistByBoard(String boardId);
 
+    List<Label> getLabelsByBoard(String boardId);
+
     List<Card> getCardsByBoard(String boardId, String... filter);
 
     Prefs getPrefsByBoard(String boardId);

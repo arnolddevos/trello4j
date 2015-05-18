@@ -59,12 +59,20 @@ public interface CardService {
     void moveCardToList(String cardId, String listId);
 
     /**
-     * Add Label to a Card.
+     * Add Label to a Card by color.
      *
      * @param cardId     the card id
      * @param labelValue the color of the Label to add
      */
     void addLabelToCard(String cardId, String labelValue);
+
+    /**
+     * Add Label to a Card by name.
+     *
+     * @param cardId     the card id
+     * @param labelName  the naem of the Label to add
+     */
+    void addLabelNameToCard(String cardId, String labelName);
 
     /**
      * Add Card to Archive.

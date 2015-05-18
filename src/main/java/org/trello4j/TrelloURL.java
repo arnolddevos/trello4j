@@ -21,6 +21,7 @@ public class TrelloURL {
     public static final String BOARD_CREATE_URL = TRELLO_REST_URL + "boards";
     public static final String BOARD_CARDS_URL = TRELLO_REST_URL + "boards/{0}/cards";
     public static final String BOARD_CHECKLISTS_URL = TRELLO_REST_URL + "boards/{0}/checklists";
+    public static final String BOARD_LABELS_URL = TRELLO_REST_URL + "boards/{0}/labels";
     public static final String BOARD_LISTS_URL = TRELLO_REST_URL + "boards/{0}/lists";
     public static final String BOARD_MEMBERS_URL = TRELLO_REST_URL + "boards/{0}/members";
     public static final String BOARD_MEMBERS_INVITED_URL = TRELLO_REST_URL + "boards/{0}/membersInvited";
