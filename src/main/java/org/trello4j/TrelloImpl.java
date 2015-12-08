@@ -647,7 +647,7 @@ public class TrelloImpl implements Trello {
                 .token(token)
                 .build();
 
-        doMultiPartRequest(url, fileName);
+        doMultiPartPost(url, fileName);
     }
 
     @Override
@@ -1451,7 +1451,7 @@ public class TrelloImpl implements Trello {
     }
 
     private InputStream doGet(String url) {
-        return doRequest(url, METHOD_GET);
+        return doRequest(url, METHOD_GET, null, null);
     }
 
     private InputStream doPut(String url, Map<String, String> map) {
@@ -1464,23 +1464,20 @@ public class TrelloImpl implements Trello {
                         .append("=")
                         .append(URLEncoder.encode(map.get(key), "UTF-8"));
             }
-            return doRequest(sb.toString(), METHOD_PUT);
+            return doRequest(sb.toString(), METHOD_PUT, null, null);
         } catch (UnsupportedEncodingException e) {
             throw new TrelloException(e.getMessage());
         }
     }
 
     private InputStream doPost(String url, Map<String, String> map) {
-        return doRequest(url, METHOD_POST, map);
+        return doRequest(url, METHOD_POST, map, null);
     }
 
     private InputStream doDelete(String url) {
-        return doRequest(url, METHOD_DELETE);
+        return doRequest(url, METHOD_DELETE, null, null);
     }
 
-    private InputStream doRequest(String url, String requestMethod) {
-        return doRequest(url, requestMethod, null);
-    }
 
     /**
      * Execute a POST request with Multipart File Upload Request.
@@ -1488,31 +1485,19 @@ public class TrelloImpl implements Trello {
      * @param url      Trello API URL.
      * @param filePath Absolute Path of the File to Attach.
      */
-    private void doMultiPartRequest(String url, String filePath) {
-        try {
-            DefaultHttpClient httpclient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(url);
-
-            FileBody uploadFilePart = new FileBody(new File(filePath));
-            MultipartEntity reqEntity = new MultipartEntity();
-            reqEntity.addPart("file", uploadFilePart);
-            httpPost.setEntity(reqEntity);
-
-            HttpResponse execute = httpclient.execute(httpPost);
-            System.out.println("execute = " + execute.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void doMultiPartPost(String url, String filePath) {
+        doRequest(url, METHOD_POST, null, filePath);
     }
 
     /**
-     * Execute a POST request with URL-encoded key-value parameter pairs.
+     * Execute a request. For POST and PUT send URL-encoded key-value pairs in the body or upload a file.
      *
      * @param url Trello API URL.
+     * @param requestMethod 
      * @param map Key-value map.
      * @return the response input stream.
      */
-    private InputStream doRequest(String url, String requestMethod, Map<String, String> map) {
+    private InputStream doRequest(String url, String requestMethod, Map<String, String> map, String filePath) {
         int tryCount = 1;
         List<Integer> delays = Arrays.asList(); // Arrays.asList(1, 5, 10, 30, 120);
         while (true) {
@@ -1520,10 +1505,10 @@ public class TrelloImpl implements Trello {
                 HttpsURLConnection conn = (HttpsURLConnection) new URL(url)
                         .openConnection();
                 conn.setRequestProperty("Accept-Encoding", "gzip, deflate");
-                conn.setDoOutput(requestMethod.equals(METHOD_POST) || requestMethod.equals(METHOD_PUT));
                 conn.setRequestMethod(requestMethod);
 
                 if (map != null && !map.isEmpty()) {
+                    conn.setDoOutput(true);
                     StringBuilder sb = new StringBuilder();
                     for (String key : map.keySet()) {
                         sb.append(sb.length() > 0 ? "&" : "")
@@ -1532,6 +1517,14 @@ public class TrelloImpl implements Trello {
                                 .append(URLEncoder.encode(map.get(key), "UTF-8"));
                     }
                     conn.getOutputStream().write(sb.toString().getBytes());
+                    conn.getOutputStream().close();
+                } 
+                else if( filePath != null) {
+                    conn.setDoOutput(true);
+                    FileBody uploadFilePart = new FileBody(new File(filePath));
+                    MultipartEntity reqEntity = new MultipartEntity();
+                    reqEntity.addPart("file", uploadFilePart);
+                    reqEntity.writeTo(conn.getOutputStream());
                     conn.getOutputStream().close();
                 }
 
