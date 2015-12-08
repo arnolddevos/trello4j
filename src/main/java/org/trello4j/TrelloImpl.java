@@ -1524,6 +1524,7 @@ public class TrelloImpl implements Trello {
                     FileBody uploadFilePart = new FileBody(new File(filePath));
                     MultipartEntity reqEntity = new MultipartEntity();
                     reqEntity.addPart("file", uploadFilePart);
+                    conn.setRequestProperty("Content-Type", reqEntity.getContentType().getValue());
                     reqEntity.writeTo(conn.getOutputStream());
                     conn.getOutputStream().close();
                 }
